@@ -1,11 +1,16 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/authProvider";
 import axios from "../../api/axios";
 import "./Login.css";
-const LOGIN_URL = "/auth";
+const LOGIN_URL = "http://localhost:5000/users/login";
 
 const Login = () => {
-  const [setAuth] = useContext(AuthContext);
+  // const [setAuth] = useContext(AuthContext);
+
+  
+  let navigate = useNavigate();
+ 
 
   const userRef = useRef();
   const errRef = useRef();
@@ -25,42 +30,45 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  }
-    // try {
-    //   const response = await axios.post(
-    //     LOGIN_URL,
-    //     JSON.stringify({ user, pwd }),
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //       withCredentials: true,
-    //     }
-    //   );
+  
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        {
+          user , pwd
+        }
+      );
 
-    //   console.log(JSON.stringify(response?.data));
+      console.log(JSON.stringify(response?.data));
 
-    //   const accessToken = response?.data?.accessToken;
-    //   const roles = response?.data?.roles;
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
 
-    //   setAuth({ user, pwd, roles, accessToken });
+      // setAuth({ user, pwd, roles, accessToken });
 
-    //   setUser("");
-    //   setPwd("");
-    //   setSuccess(true);
-    // } catch (err) {
-    //   if (!err?.response) {
-    //     setErrMsg("No server response");
-    //   } else if (err.response?.status === 400) {
-    //     setErrMsg("Missing username or password");
-    //   }else if (err.response?.status === 401) {
-    //     setErrMsg("Unauthorised");
-    //   } 
-    //   else {
-    //     setErrMsg("Login Failed!");
-    //   }
+      setUser("");
+      setPwd("");
+      setSuccess(true);
 
-    //   errRef.current.focus();
-    // }
-  // };
+      // if(success == true){
+      //   navigate("/exercise");
+      // }
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No server response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing username or password");
+      }else if (err.response?.status === 401) {
+        setErrMsg("Unauthorised");
+      } 
+      else {
+        setErrMsg("Login Failed!");
+      }
+
+      errRef.current.focus();
+    }
+  };
+  
 
   return (
     <>
@@ -69,7 +77,7 @@ const Login = () => {
           <h1>You are logged in!</h1>
           <br />
           <p>
-            <a href="#">Go to Home</a>
+            <a href="/exercise">Go to Home</a>
           </p>
         </section>
       ) : (
@@ -109,7 +117,7 @@ const Login = () => {
             <br />
             <span className="line">
               {/*put router link here*/}
-              <a href="#">Sign Up</a>
+              <a href="/register">Sign Up</a>
             </span>
           </p>
         </section>

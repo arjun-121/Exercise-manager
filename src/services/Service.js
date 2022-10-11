@@ -9,8 +9,10 @@ class Service {
     .then((res) => {
       return res;
     })
-    .catch(() => {
-      ShowSwalMsg("error", "Something went wrong");
+    .catch((err) => {
+      if (!err?.response) {
+        ShowSwalMsg("No server response");
+      } 
     });
 }
 

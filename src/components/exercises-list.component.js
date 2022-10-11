@@ -4,6 +4,7 @@ import axios from "axios";
 import EXERCISE from "../routes/ExerciseRoutes";
 import { ShowSwalMsg } from "./swal.js";
 import Service from '../services/Service';
+import Navbar from "./navbar.component";
 
 const ExercisesList = () => {
   let history = useNavigate();
@@ -49,6 +50,8 @@ const ExercisesList = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div>
       <h3>Logged Exercises</h3>
       <table className="table">
@@ -68,7 +71,7 @@ const ExercisesList = () => {
                 <td>{data.username}</td>
                 <td>{data.description}</td>
                 <td>{data.duration}</td>
-                <td>{data.date}</td>
+                <td>{data.date.slice(0,10)}</td>
                 <td>
                   <button
                     className="btn btn-primary"
@@ -89,6 +92,7 @@ const ExercisesList = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

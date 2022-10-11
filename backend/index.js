@@ -42,11 +42,13 @@ connection.once("open", () => {
 const exerciseRouter = require("./routes/exercises");
 const userRouter = require("./routes/users");
 const registerRouter = require("./routes/register");
+const loginRouter = require('./routes/login');
 // const searchRouter = require('./routes/search');
 
 app.use("/exercises", exerciseRouter);
 app.use("/users", userRouter);
 app.use("/register" , registerRouter);
+app.use("/users" , loginRouter);
 // 
 
 

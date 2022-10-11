@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import EXERCISE from "../routes/ExerciseRoutes";
+import Navbar from "./navbar.component";
 
 
 
@@ -40,6 +41,8 @@ const EditExercise = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div>
       {/* <form> */}
       <div className="form-group">
@@ -96,6 +99,7 @@ const EditExercise = () => {
       </div>
       {/* </form> */}
     </div>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Register.css";
 import axios from "axios";
 import REGISTER from "../../routes/Register";
+import { ShowSwalMsg } from "../swal";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -62,18 +63,15 @@ const Register = () => {
       return;
     }
 
-    setSuccess(true);
+
 
     try {
-      console.log(user , pwd);
       const response = await axios
         .post(
           REGISTER.DATA.POST,
           {
-            headers: {
               username: user,
-              password: pwd,
-            },
+              password: pwd
           }
           // {
           //   headers: { "Content-Type": "application/json" },
@@ -89,11 +87,11 @@ const Register = () => {
       setMatchPwd("");
     } catch (err) {
       if (!err?.response) {
-        setErrMsg("No server response");
+        ShowSwalMsg("No server response");
       } else if (err.response?.status === 409) {
-        setErrMsg("Username already taken");
+        ShowSwalMsg("Username already taken");
       } else {
-        setErrMsg("Registration Failed!");
+        ShowSwalMsg("Registration Failed!");
       }
 
       // errRef.current.focus();
@@ -105,10 +103,10 @@ const Register = () => {
   return (
     <>
       {success ? (
-        <section>
-          <h1>Success!</h1>
+        <section className="container ">
+          <h1>You have been registered successfully!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <a href="/login">Sign In</a>
           </p>
         </section>
       ) : (
@@ -243,7 +241,7 @@ const Register = () => {
             <br />
             <span className="line">
               {/*put router link here*/}
-              <a href="#">Sign In</a>
+              <a href="/login">Sign In</a>
             </span>
           </p>
         </section>

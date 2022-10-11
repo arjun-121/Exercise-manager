@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EXERCISE from "../routes/ExerciseRoutes";
+import Navbar from "./navbar.component";
 import USER from "../routes/UserRoutes";
 // import { ShowSwalMsg } from "./swal.js";
 
@@ -97,7 +98,12 @@ const CreateExercise = () => {
     // }
   };
   return (
+    <>
+    <Navbar/>
+
+  
     <div
+
       style={{
         width: "40%",
         display: "flex",
@@ -221,6 +227,7 @@ const CreateExercise = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

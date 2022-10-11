@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import USER from "../routes/UserRoutes";
 
 import axios from "axios";
-
+import Navbar from "./navbar.component";
 import { toast } from "react-toastify";
 
 const defaulUser = {
@@ -48,6 +48,8 @@ const CreateUser = () => {
   // };
 
   return (
+    <>
+   <Navbar/>
     <div style={{ width: "36rem" }}>
       <h3>Create New User</h3>
       <form id="user-form">
@@ -84,6 +86,7 @@ const CreateUser = () => {
         
       </button> */}
     </div>
+    </>
   );
 };
 
